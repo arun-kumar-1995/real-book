@@ -1,5 +1,6 @@
 import app from "./app.js";
 import db from "./config/db.config.js";
+import errorMiddleware from "./middlewares/error.middleware.js";
 
 const { PORT: port = 8000 } = process.env;
 
@@ -30,3 +31,6 @@ app.all("*", (req, res, next) => {
     message: "Opps! , We unable to get the page you are looking for",
   });
 });
+
+// global error middleware
+app.use(errorMiddleware);
