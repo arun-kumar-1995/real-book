@@ -1,4 +1,4 @@
-const sendResponse = (res, statusCode, message, data = null) => {
+const SendResponse = (res, statusCode, message, data = null) => {
   return res.status(statusCode).json({
     success: statusCode >= 200 && statusCode < 300,
     message,
@@ -7,4 +7,4 @@ const sendResponse = (res, statusCode, message, data = null) => {
   });
 };
 
-export default sendResponse;
+export default SendResponse;

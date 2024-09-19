@@ -1,6 +1,7 @@
 import User from "../models/user.models.js";
 import CatchAsyncError from "../utils/catchAsyncError.utils.js";
 import ErrorHandler from "../utils/errorHandler.utils.js";
+import SendResponse from "../utils/responseHandler.utils.js";
 
 export const signIn = async (req, res, next) => {
   try {
@@ -35,5 +36,5 @@ export const register = CatchAsyncError(async (req, res, next, session) => {
   // create user
   user = await User.create([{ name, email, password, role }], { session });
 
-  return new ApiResponse(res, true, 201, "User created", { user }, "/");
+  return SendResponse(res, 201, "User created", { user });
 });
