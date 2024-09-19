@@ -132,11 +132,12 @@ header .header-container {
   align-items: center;
 }
 
-header h3 {
+header .logo a {
   font-weight: var(--font-wt-600);
   letter-spacing: 1px;
   color: rgb(16, 236, 189);
   text-transform: uppercase;
+  font-size: 1.8rem;
 }
 
 nav ul {
