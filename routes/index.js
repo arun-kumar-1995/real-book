@@ -1,11 +1,8 @@
 import express from "express";
 const router = express.Router();
-
-router.get("/", async (req, res, next) => {
-  return res.status(200).json({
-    success: true,
-    message: "Route was successfully called",
-  });
-});
-
+// import routes
+import userRoutes from "./user.routes.js";
+// define routes
+router.use("/" , userRoutes);
+//export default route
 export default router;
