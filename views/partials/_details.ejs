@@ -40,6 +40,8 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", initPage);
+  let selectedDate = null;
+
   // define month array
   const monthNames = [
     "January",
@@ -98,6 +100,15 @@
     const fragment = drawCalendar(currentDate, firstDay, daysInMonth);
     dateContainer.innerHTML = "";
     dateContainer.appendChild(fragment);
+    // for selecting and deselecting the date
+    const dates = document.querySelectorAll(".date");
+    const todayDate = document.querySelector(".date.selected-date");
+
+    Array.from(dates).forEach((date) => {
+      date.addEventListener("click", function (e) {
+        selectDate(date, todayDate);
+      });
+    });
   }
 
   function drawCalendar(currentDate, firstDay, daysInMonth) {
@@ -135,5 +146,19 @@
     }
 
     return fragment;
+  }
+
+  function deselectDate(dateElement) {
+    if (dateElement) {
+      dateElement.classList.remove("selected-date");
+    }
+  }
+  // Function to handle the selection of a date
+  function selectDate(dateElement, todayDate) {
+    deselectDate(selectedDate); // Deselect the previously selected date
+    deselectDate(todayDate, todayDate); // Deselect the original selected date (today)
+
+    dateElement.classList.add("selected-date");
+    selectedDate = dateElement; // Update the currently selected date
   }
 </script>
