@@ -59,3 +59,10 @@ export const createSession = CatchAsyncError(async (req, res, next) => {
 
   return SendResponse(res, 200, "You are logged in", { token }, "/classroom");
 });
+
+export const signOut = CatchAsyncError(async (req, res, next) => {
+  res.cookie("_session", "", {
+    httpOnly: true,
+  });
+  return SendResponse(res, 200, "You are logged out", "", "/");
+});
