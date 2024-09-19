@@ -26,6 +26,7 @@
    function initBookingPage() {
     const seatingArea = document.querySelector(".seating-area");
     drawSeat();
+    createClassroom(rows, seatsPerRow, mid, totalSeats, bookedSeats, seatingArea)
    } 
 
    function drawSeat(seatNumber, isBooked) {
@@ -42,12 +43,48 @@
 
    }
 
+   function createClassroom(rows, seatsPerRow, mid, totalSeats, bookedSeats , seatingArea){
+    for (let row = 1; row <= rows; row++) {
+        const rowDiv = document.createElement('div');
+        rowDiv.classList.add('row');
+
+        for (let seat = 1; seat <= seatsPerRow; seat++) {
+   
+        if (seat === mid + 1 ) {
+            const gapDiv = document.createElement('div');
+            gapDiv.classList.add('middle-gap');
+            rowDiv.appendChild(gapDiv);
+        }
+
+        if (seatNumber <= totalSeats) {
+                const seatDiv = document.createElement('div');
+                seatDiv.classList.add('seat');
+                seatDiv.textContent = `s-${seatNumber}`;
+                rowDiv.appendChild(seatDiv);
+                seatNumber++;
+                // for booked seats
+                if(bookedSeats.includes(seatNumber - 1)){
+                    seatDiv.classList.add('booked');
+                }
+            }
+            
+
+
+        }
+        seatingArea.appendChild(rowDiv);
+    }
+   
+   }
+
+
+
+
     // Function to create a middle gap div
   function createMiddleGap() {
     const gapDiv = document.createElement("div");
     gapDiv.classList.add("middle-gap");
     return gapDiv;
   }
-  
+
  document.addEventListener("DOMContentLoaded", initBookingPage);
   </script>
