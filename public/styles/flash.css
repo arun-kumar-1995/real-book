@@ -1,0 +1,56 @@
+.flash-modal {
+  position: absolute;
+  top: 10vh;
+  right: 2rem;
+  display: none;
+}
+
+/* show class */
+.flash-modal.show {
+  display: block;
+}
+
+/* modal content */
+.modal-content {
+  display: flex;
+  align-items: center;
+  min-width: 20rem;
+  border-radius: var(--pd-08);
+  background-color: #fff;
+  padding: var(--pd-08) var(--pd-1-6);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.5s ease-in-out;
+}
+
+/* display class */
+.modal-content.display {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-content p#modal-message {
+  flex: 1;
+  font-size: 1.32rem;
+  color: var(--clr-text-dark);
+  margin: 0 var(--mg-04);
+}
+
+.modal-content .modal-icon {
+  font-size: 2rem;
+}
+.modal-content span#modalCloseBtn {
+  font-size: 2.4rem;
+  font-weight: var(--font-wt-600);
+  cursor: pointer;
+}
+
+.success {
+  color: var(--clr-success);
+}
+
+.error {
+  color: var(--clr-error);
+}
