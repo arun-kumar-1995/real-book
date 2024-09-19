@@ -154,7 +154,7 @@ header li a {
   /* color: var(--clr-text-light); */
 }
 
-a.btn {
+.btn {
   padding: var(--pd-08) var(--pd-1-6);
   border-radius: var(--pd-);
   font-size: 1em;
@@ -175,6 +175,7 @@ a.btn-login:hover {
   background-color: #063e77;
   transform: scale(1.05);
 }
+button.btn-signout,
 a.btn-register {
   background: linear-gradient(135deg, #ff6f61, #ff9472);
   border-radius: var(--pd-1-2);
