@@ -28,9 +28,26 @@
     drawSeat();
    } 
 
-   function drawSeat() {
+   function drawSeat(seatNumber, isBooked) {
+    const seatDiv = document.createElement("div");
+    seatDiv.classList.add("seat");
+    seatDiv.textContent = `s-${seatNumber}`;
+    
+    // Mark the seat as booked if needed
+    if (isBooked) {
+      seatDiv.classList.add("booked");
+    }
+    
+    return seatDiv;
 
    }
 
+    // Function to create a middle gap div
+  function createMiddleGap() {
+    const gapDiv = document.createElement("div");
+    gapDiv.classList.add("middle-gap");
+    return gapDiv;
+  }
+  
  document.addEventListener("DOMContentLoaded", initBookingPage);
   </script>
