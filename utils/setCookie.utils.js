@@ -10,7 +10,7 @@ const setCookie = (res, user, token) => {
 
   // setting up cookie
   res.cookie(
-    "token",
+    "_session",
     JSON.stringify({
       token,
       user: { id: user._id, name: user.name },

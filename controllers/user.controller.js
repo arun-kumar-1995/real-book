@@ -4,6 +4,7 @@ import CatchAsyncError from "../utils/catchAsyncError.utils.js";
 import ErrorHandler from "../utils/errorHandler.utils.js";
 import SendResponse from "../utils/responseHandler.utils.js";
 import setCookie from "../utils/setCookie.utils.js";
+import getSignInToken from "../utils/getSignInToken.utils.js";
 
 export const signIn = async (req, res, next) => {
   try {
@@ -45,7 +46,7 @@ export const createSession = CatchAsyncError(
   async (req, res, next, session) => {
     const { email, password } = req.body;
     // check for user existence
-    const user = await User.findOne({ email }).lean();
+    const user = await User.findOne({ email });
     if (!user) return ErrorHandler(res, 404, "User not found");
 
     // if user match passowrd
@@ -56,7 +57,7 @@ export const createSession = CatchAsyncError(
     const token = getSignInToken(user._id);
     // set token inside cookie
     setCookie(res, user, token);
-
+    
     return SendResponse(res, 200, "You are logged in", { token }, "/classroom");
   }
 );
