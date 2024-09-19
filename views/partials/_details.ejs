@@ -55,4 +55,14 @@
     "November",
     "December",
   ];
+
+  function getCurrentMonthYear() {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+
+    return { currentDate, firstDay, daysInMonth, currentMonth, currentYear };
+  }
 </script>
