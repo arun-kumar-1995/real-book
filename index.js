@@ -19,10 +19,12 @@ db.once("open", function () {
   });
 });
 
+import checkAuth from "./middlewares/auth.middleware.js";
+app.use(checkAuth);
+
 // route
 import appRoute from "./routes/index.js";
 app.use("/", appRoute);
-
 
 // page not found error
 app.all("*", (req, res, next) => {
