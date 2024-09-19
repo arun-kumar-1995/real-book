@@ -7,6 +7,10 @@ router.get("/", async (req, res, next) => {
   return res.render("home", { title: "Real Book" });
 });
 
+router.get("/sign-in", async (req, res, next) => {
+  return res.render("signin", { title: "Real Book | Sign In" });
+});
+
 router.use("/", userRoutes);
 //export default route
 export default router;
