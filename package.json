@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "building real time seat booking service using socket redis",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
