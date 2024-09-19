@@ -5,12 +5,20 @@
     </div>
     <nav>
       <ul>
+        <% if(user) {%>
+        <li>
+          <form action="/destroy-session" class="form" method="POST">
+            <button type="submit" class="btn btn-register">Logout</button>
+          </form>
+        </li>
+        <%}else{%>
         <li>
           <a href="/sign-in" class="btn btn-login">Login</a>
         </li>
         <li>
           <a href="/sign-up" class="btn btn-register">Register</a>
         </li>
+        <%}%>
       </ul>
     </nav>
   </div>

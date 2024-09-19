@@ -42,22 +42,20 @@ export const register = CatchAsyncError(async (req, res, next, session) => {
   return SendResponse(res, 201, "User created", { user }, "/sign-in");
 }, true);
 
-export const createSession = CatchAsyncError(
-  async (req, res, next, session) => {
-    const { email, password } = req.body;
-    // check for user existence
-    const user = await User.findOne({ email });
-    if (!user) return ErrorHandler(res, 404, "User not found");
+export const createSession = CatchAsyncError(async (req, res, next) => {
+  const { email, password } = req.body;
+  // check for user existence
+  const user = await User.findOne({ email });
+  if (!user) return ErrorHandler(res, 404, "User not found");
 
-    // if user match passowrd
-    const match = await user.matchPassword(password);
-    if (!match) return ErrorHandler(res, 400, "Invalid email or password");
+  // if user match passowrd
+  const match = await user.matchPassword(password);
+  if (!match) return ErrorHandler(res, 400, "Invalid email or password");
 
-    //get token
-    const token = getSignInToken(user._id);
-    // set token inside cookie
-    setCookie(res, user, token);
-    
-    return SendResponse(res, 200, "You are logged in", { token }, "/classroom");
-  }
-);
+  //get token
+  const token = getSignInToken(user._id);
+  // set token inside cookie
+  setCookie(res, user, token);
+
+  return SendResponse(res, 200, "You are logged in", { token }, "/classroom");
+});
