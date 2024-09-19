@@ -1,7 +1,9 @@
+import { response } from "express";
 import User from "../models/user.models.js";
 import CatchAsyncError from "../utils/catchAsyncError.utils.js";
 import ErrorHandler from "../utils/errorHandler.utils.js";
 import SendResponse from "../utils/responseHandler.utils.js";
+import setCookie from "../utils/setCookie.utils.js";
 
 export const signIn = async (req, res, next) => {
   try {
@@ -52,25 +54,8 @@ export const createSession = CatchAsyncError(
 
     //get token
     const token = getSignInToken(user._id);
-
-    //cookie option
-    const cookie_options = {
-      expires: new Date(
-        Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-      ),
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-    };
-
-    // create cookie
-    res.cookie(
-      "_session",
-      JSON.stringify({
-        token,
-        user: { role: user.role, id: user._id, username: user.username },
-      }),
-      cookie_options
-    );
+    // set token inside cookie
+    setCookie(res, user, token);
 
     return SendResponse(res, 200, "You are logged in", { token }, "/classroom");
   },
