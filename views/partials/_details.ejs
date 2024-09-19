@@ -55,7 +55,7 @@
     "November",
     "December",
   ];
-// curent date properties
+  // curent date properties
   function getCurrentMonthYear() {
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
@@ -66,9 +66,9 @@
     return { currentDate, firstDay, daysInMonth, currentMonth, currentYear };
   }
 
-   // create empty divs
+  // create empty divs
 
-   function createDiv(classes = []) {
+  function createDiv(classes = []) {
     const div = document.createElement("div");
     div.classList.add(...classes);
     return div;
@@ -80,5 +80,60 @@
       row.appendChild(emptyDiv);
     }
     fragment.appendChild(row);
+  }
+
+  // initialize page and get necessary reference of elements
+  function initPage() {
+    // get reference for dom elements
+    const dateContainer = document.getElementById("date-container");
+    const monthYearDisplay = document.getElementById("current-month-year");
+    // get date properties
+    const { currentDate, firstDay, daysInMonth, currentMonth, currentYear } =
+      getCurrentMonthYear();
+
+    // Update month and year display
+    monthYearDisplay.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+    //  draw calender
+    const fragment = drawCalendar(currentDate, firstDay, daysInMonth);
+    dateContainer.innerHTML = "";
+    dateContainer.appendChild(fragment);
+  }
+
+  function drawCalendar(currentDate, firstDay, daysInMonth) {
+    // using DocumentFragment to minimize reflows
+    const fragment = document.createDocumentFragment();
+    let currentRow = createDiv(["d-flex", "date-row"]);
+
+    // Add empty divs for the days before the 1st of the month
+    createEmptyDays(currentRow, firstDay, fragment);
+
+    // Generate the actual days in the calendar
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayDiv = createDiv(["c-btn", "date"]);
+      dayDiv.textContent = day;
+
+      // Highlight the current day
+      if (day === currentDate.getDate()) {
+        dayDiv.classList.add("selected-date");
+      }
+
+      currentRow.appendChild(dayDiv);
+
+      // If the row completes 7 days
+      //   append the row and start a new one
+
+      if ((firstDay + day) % 7 === 0) {
+        fragment.appendChild(currentRow);
+        currentRow = createDiv(["d-flex", "date-row"]);
+      }
+    }
+
+    // Append the last row if it has remaining days
+    if (currentRow.children.length > 0) {
+      fragment.appendChild(currentRow);
+    }
+
+    return fragment;
   }
 </script>
