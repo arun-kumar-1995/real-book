@@ -4,7 +4,7 @@
   <div class="form-container">
     <h3 class="heading">Sign Up</h3>
 
-    <form class="form" action="/create" method="POST">
+    <form class="form" action="/register" method="POST">
       <!-- Username input -->
       <div class="form-control">
         <label class="form-label" for="name"></label>
@@ -57,21 +57,6 @@
           placeholder="Confirm Password"
           required
         />
-      </div>
-
-      <!-- User role input -->
-      <div class="form-control">
-        <label class="form-label" for="role"></label>
-        <select
-          class="login-form-input"
-          id="role"
-          name="role"
-          aria-label="Default select example"
-          required
-        >
-          <option selected value="employee">Employee</option>
-          <option value="admin">Admin</option>
-        </select>
       </div>
 
       <!-- Buttons container -->

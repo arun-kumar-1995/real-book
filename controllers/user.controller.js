@@ -34,7 +34,7 @@ export const register = CatchAsyncError(async (req, res, next, session) => {
     return ErrorHandler(res, 400, "Passwords do not match");
 
   // create user
-  user = await User.create([{ name, email, password, role }], { session });
+  user = await User.create([{ name, email, password }], { session });
 
   return SendResponse(res, 201, "User created", { user });
 });
