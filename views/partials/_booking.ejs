@@ -21,12 +21,24 @@
     let seatNumber = 1;
     // for booked seat number
     const bookedSeats = [1 , 5, 10 , 12];
-
+    let selectedSeat = null;
 
    function initBookingPage() {
+
+    // globalselectors
     const seatingArea = document.querySelector(".seating-area");
     drawSeat();
     createClassroom(rows, seatsPerRow, mid, totalSeats, bookedSeats, seatingArea)
+
+    // for selecting and deselecting seats
+    const seats = document.querySelectorAll('.seat');
+// add event listeners for each seat
+  Array.from(seats).forEach((seat) => {
+    seat.addEventListener('click', function () {
+        // definimg select seat function
+      selectSeat(seat);
+    });
+  });
    } 
 
    function drawSeat(seatNumber, isBooked) {
@@ -80,5 +92,29 @@
     return gapDiv;
   }
 
- document.addEventListener("DOMContentLoaded", initBookingPage);
+ 
+  // for selecting and deselecting the seats
+
+    // Function to handle seat selection
+  function selectSeat(seat) {
+    // Deselect the previously selected seat if it exists
+    if (selectedSeat) {
+      updateSeatState(selectedSeat, false);
+    }
+
+    // Select the current seat
+    updateSeatState(seat, true);
+    selectedSeat = seat;
+  }
+
+  // Function to update the visual state of a seat
+  function updateSeatState(seat, isSelected) {
+    if (isSelected) {
+      seat.classList.add('selected-seat');
+    } else {
+      seat.classList.remove('selected-seat');
+    }
+  }
+
+document.addEventListener("DOMContentLoaded", initBookingPage);
   </script>
