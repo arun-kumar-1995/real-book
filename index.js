@@ -21,3 +21,12 @@ db.once("open", function () {
 // route
 import appRoute from "./routes/index.js";
 app.use("/", appRoute);
+
+
+// page not found error
+app.all("*", (req, res, next) => {
+  return res.status(200).json({
+    success: false,
+    message: "Opps! , We unable to get the page you are looking for",
+  });
+});
