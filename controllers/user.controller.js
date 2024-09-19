@@ -1,5 +1,6 @@
 import User from "../models/user.models.js";
 import CatchAsyncError from "../utils/catchAsyncError.utils.js";
+import ErrorHandler from "../utils/errorHandler.utils.js";
 
 export const signIn = async (req, res, next) => {
   try {
@@ -26,10 +27,10 @@ export const signUp = async (req, res, next) => {
 export const register = CatchAsyncError(async (req, res, next, session) => {
   const { name, password, confirm_password, email } = req.body;
   let user = await User.findOne({ email }).session(session);
-  if (user) return new ApiResponse(res, false, 400, "User already exists");
+  if (user) return ErrorHandler(res, 400, "User already exists");
 
   if (password !== confirm_password)
-    return new ApiResponse(res, false, 400, "Passwords do not match");
+    return ErrorHandler(res, 400, "Passwords do not match");
 
   // create user
   user = await User.create([{ name, email, password, role }], { session });
