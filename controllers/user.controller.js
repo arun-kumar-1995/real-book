@@ -45,7 +45,7 @@ export const createSession = CatchAsyncError(
   async (req, res, next, session) => {
     const { email, password } = req.body;
     // check for user existence
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).lean();
     if (!user) return ErrorHandler(res, 404, "User not found");
 
     // if user match passowrd
@@ -58,6 +58,5 @@ export const createSession = CatchAsyncError(
     setCookie(res, user, token);
 
     return SendResponse(res, 200, "You are logged in", { token }, "/classroom");
-  },
-  true
+  }
 );
