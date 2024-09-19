@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
   return res.render("home", { title: "Real Book" });
 });
 
-router.use("/user", userRoutes);
+router.use("/", userRoutes);
 router.use("/classroom", classroomRoutes);
 //export default route
 export default router;
