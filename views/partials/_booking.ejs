@@ -9,8 +9,28 @@
 
   <script>
 
-   function initBookingPages() {
-    
+    // dynamically creating seats
+
+    // definig contants 
+    const totalSeats = 36;
+    const seatsPerRow = 8;
+    const rows = Math.ceil(totalSeats / seatsPerRow );
+    const mid = Math.ceil(seatsPerRow / 2);
+
+    // let initial seat number
+    let seatNumber = 1;
+    // for booked seat number
+    const bookedSeats = [1 , 5, 10 , 12];
+
+
+   function initBookingPage() {
+    const seatingArea = document.querySelector(".seating-area");
+    drawSeat();
    } 
+
+   function drawSeat() {
+
+   }
+
  document.addEventListener("DOMContentLoaded", initBookingPage);
   </script>
