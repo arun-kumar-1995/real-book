@@ -16,9 +16,15 @@ export const classroom = async (req, res, next) => {
 // book seat
 export const bookSeat = CatchAsyncError(async (req, res, next, session) => {
   if (!req.isAuthenticated()) return res.redirect("/sign-in");
-
+  console.log(req.body);
   const user = await User.findById(req.user.id);
   const booking = await Booking.create([], { session });
   if (!booking) return ErrorHandler(res, 500, "Internal server error");
-  return SendResponse(res, 201, "Your seat has been booked");
+  return SendResponse(
+    res,
+    201,
+    "Your seat has been booked",
+    { booking },
+    "/classroom"
+  );
 }, true);
