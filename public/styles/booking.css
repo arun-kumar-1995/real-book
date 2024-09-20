@@ -176,3 +176,74 @@ header {
   width: 80px;
   background-color: transparent;
 }
+
+/* modal styling */
+.seat-booking-modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease;
+}
+
+.seat-booking-modal.show {
+  display: block;
+  opacity: 1;
+}
+
+.seat-booking-modal.hide {
+  display: none;
+}
+
+.seat-booking-modal .modal-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f0f0f0;
+  padding: var(--pd-1-2);
+  text-align: center;
+  border-radius: var(--pd-08);
+  min-width: 320px;
+  transform: scale(0.8);
+  transition: transform 1s ease, opacity 0.5s ease;
+  opacity: 0;
+}
+
+.modal-container.display {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.seat-booking-modal .modal-container .modal-controls {
+  margin-top: var(--mg-1-6);
+}
+
+.seat-booking-modal .modal-container h3 {
+  font-size: 1.6rem;
+  font-weight: var(--font-wt-500);
+}
+
+.seat-booking-modal .modal-container .modal-btn {
+  padding: var(--pd-08) var(--pd-1-6);
+  border-radius: var(--pd-04);
+  color: #f0f0f0;
+  margin: 0 var(--mg-08);
+}
+.seat-booking-modal .modal-container .modal-btn:hover {
+  cursor: pointer;
+}
+
+.seat-booking-modal .modal-container #m-confirmBtn {
+  background-color: rgb(27, 189, 27);
+}
+
+.seat-booking-modal .modal-container #m-cancelBtn {
+  background-color: var(--clr-booked);
+}

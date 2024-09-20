@@ -6,6 +6,27 @@
     <%- include('./partials/_details'); %>
     <!-- booking layout makrup -->
     <%- include('./partials/_booking');%>
-    <!-- booking confirm modal -->
   </div>
+  <!-- booking confirm modal -->
+  <%- include('./partials/_modal'); %>
 </div>
+
+<!-- MODAL script -->
+<script>
+  const bookingModal = document.getElementById("booking-modal");
+  const modalText = document.getElementById("modalText");
+  const yesButton = document.getElementById("m-confirmBtn");
+  const noButton = document.getElementById("m-cancelBtn");
+  let selectedSeatNumber = null;
+
+  function openModal() {
+    bookingModal.classList.add("show");
+    bookingModal.children[0].classList.add("display");
+  }
+  function closeModal() {
+    bookingModal.classList.remove("show");
+    bookingModal.children[0].classList.remove("display");
+  }
+
+  noButton.addEventListener("click", closeModal);
+</script>

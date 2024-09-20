@@ -37,6 +37,12 @@
     seat.addEventListener('click', function () {
         // definimg select seat function
       selectSeat(seat);
+
+      // for modal
+      selectedSeatNumber = seat.getAttribute("data-seat-number");
+      modalText.textContent = `Do you want to book Seat-${selectedSeatNumber} ?`;
+      openModal();
+
     });
   });
    } 
@@ -72,6 +78,7 @@
                 const seatDiv = document.createElement('div');
                 seatDiv.classList.add('seat');
                 seatDiv.textContent = `s-${seatNumber}`;
+                seatDiv.setAttribute("data-seat-number" , seatNumber);
                 rowDiv.appendChild(seatDiv);
                 seatNumber++;
                 // for booked seats
