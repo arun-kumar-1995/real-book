@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import socketHandler from "../controllers/soce.controller.js";
+import socketHandler from "../sockets/socket.handler.js";
 
 const InitializeSocketConnection = (expressServer) => {
   // setting up socket.io
