@@ -30,4 +30,24 @@ app.use(express.static(path.join(__dirname, "./public")));
 app.set("layout extractStyles", true);
 app.set("layout extractScripts", true);
 
+import errorMiddleware from "./middlewares/error.middleware.js";
+import checkAuth from "./middlewares/auth.middleware.js";
+app.use(checkAuth);
+
+// route
+import appRoute from "./routes/index.js";
+
+app.use("/", appRoute);
+
+// page not found error
+app.all("*", (req, res, next) => {
+  return res.status(200).json({
+    success: false,
+    message: "Opps! , We unable to get the page you are looking for",
+  });
+});
+
+// global error middleware
+app.use(errorMiddleware);
+
 export default app;
