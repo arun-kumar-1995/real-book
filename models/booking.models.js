@@ -6,12 +6,15 @@ const schema = new mongoose.Schema(
       ref: "User",
     },
     seatNumber: {
-      type: String,
+      type: Number,
     },
     status: {
       type: String,
       enum: ["confirmed", "cancelled", "completed"],
       default: "confirmed",
+    },
+    bookedDate: {
+      type: Date,
     },
   },
   { timestamps: true }

@@ -16,10 +16,25 @@ export const classroom = async (req, res, next) => {
 // book seat
 export const bookSeat = CatchAsyncError(async (req, res, next, session) => {
   if (!req.isAuthenticated()) return res.redirect("/sign-in");
-  console.log(req.body);
-  const user = await User.findById(req.user.id);
-  const booking = await Booking.create([], { session });
-  if (!booking) return ErrorHandler(res, 500, "Internal server error");
+  const { seatNumber, selectedDate } = req.body;
+  const booking = await Booking.create(
+    [
+      {
+        userId: req.user.id,
+        seatNumber: parseInt(seatNumber),
+        bookedDate: selectedDate,
+      },
+    ],
+    { session }
+  );
+
+  if (!booking) return ErrorHandler(res, 500, "Booking failed");
+  await User.findByIdAndUpdate(
+    req.user.id,
+    { $addToSet: { bookings: booking[0]?._id } },
+    { new: true, upsert: true, session }
+  );
+
   return SendResponse(
     res,
     201,

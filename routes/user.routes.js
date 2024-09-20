@@ -15,5 +15,6 @@ router.route("/sign-up").get(signUp);
 router.route("/register").post(register);
 router.route("/create-session").post(createSession);
 router.route("/sign-out").post(signOut);
+
 // export user route
 export default router;
