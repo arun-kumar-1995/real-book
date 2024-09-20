@@ -104,11 +104,22 @@
     const dates = document.querySelectorAll(".date");
     const todayDate = document.querySelector(".date.selected-date");
 
+    // format date
+    calculateDateInput(currentYear, currentMonth, todayDate);
     Array.from(dates).forEach((date) => {
       date.addEventListener("click", function (e) {
         selectDate(date, todayDate);
+        calculateDateInput(currentYear, currentMonth, date);
       });
     });
+  }
+
+  function calculateDateInput(currentYear, month, date) {
+    const formattedMonth = (month + 1).toString().padStart(2, "0");
+    const formattedDay = date.innerText.toString().padStart(2, "0");
+
+    const inputDate = currentYear + "-" + formattedMonth + "-" + formattedDay;
+    document.getElementById("dateInput").value = inputDate;
   }
 
   function drawCalendar(currentDate, firstDay, daysInMonth) {
@@ -155,10 +166,10 @@
   }
   // Function to handle the selection of a date
   function selectDate(dateElement, todayDate) {
-    deselectDate(selectedDate); // Deselect the previously selected date
-    deselectDate(todayDate, todayDate); // Deselect the original selected date (today)
+    deselectDate(selectedDate);
+    deselectDate(todayDate, todayDate);
 
     dateElement.classList.add("selected-date");
-    selectedDate = dateElement; // Update the currently selected date
+    selectedDate = dateElement;
   }
 </script>

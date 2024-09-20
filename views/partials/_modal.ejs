@@ -3,7 +3,21 @@
     <h3 id="modalText">Do you want to book this seat?</h3>
     <div class="modal-controls">
       <form action="/book-seat" class="form" method="POST">
-        <button id="m-confirmBtn" type="submit" class="modal-btn">Yes</button>
+        <input
+          type="text"
+          value=""
+          name="seatNumber"
+          style="display: none"
+          id="seatInput"
+        />
+        <input
+          type="text"
+          value=""
+          name="selectedDate"
+          style="display: none"
+          id="dateInput"
+        />
+        <button type="submit" id="m-confirmBtn" class="modal-btn">Yes</button>
         <button type="button" id="m-cancelBtn" class="modal-btn">Cancel</button>
       </form>
     </div>

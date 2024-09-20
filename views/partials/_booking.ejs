@@ -41,6 +41,7 @@
       // for modal
       selectedSeatNumber = seat.getAttribute("data-seat-number");
       modalText.textContent = `Do you want to book Seat-${selectedSeatNumber} ?`;
+      document.getElementById("seatInput").value = selectedSeatNumber;
       openModal();
 
     });
