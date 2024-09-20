@@ -10,8 +10,8 @@ const schema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["confirmed", "cancelled", "completed"],
-      default: "confirmed",
+      enum: ["booked", "cancelled", "completed"],
+      default: "booked",
     },
     bookedDate: {
       type: Date,

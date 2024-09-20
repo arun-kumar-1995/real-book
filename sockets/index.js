@@ -10,6 +10,8 @@ const InitializeSocketConnection = (expressServer) => {
     },
   });
 
+  // apply middleware here
+
   socketIo.on("connection", (socket) => {
     console.log("A user connected:", socket.id);
     // call socket handler
