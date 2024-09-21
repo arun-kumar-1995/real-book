@@ -3,7 +3,7 @@
   <div class="seat-available">
     <h4>Seat Available</h4>
 
-    <div class="seat-analytics total-seats">
+    <div class="seat-analytics total-seats" id="seat-analytics">
       <p id="total-seats">Total seat: 65</p>
       <p id="remaining-seat">
         <span class="box remaining-seat"></span>
@@ -105,12 +105,15 @@
     const todayDate = document.querySelector(".date.selected-date");
 
     // format date
-    calculateDateInput(currentYear, currentMonth, todayDate);
+    let inputDate = calculateDateInput(currentYear, currentMonth, todayDate);
+    // function to send socket event
+    getAvailableSeat(inputDate);
+
     Array.from(dates).forEach((date) => {
       date.addEventListener("click", function (e) {
         selectDate(date, todayDate);
-        const inputDate = calculateDateInput(currentYear, currentMonth, date);
-        // send socket event
+        inputDate = calculateDateInput(currentYear, currentMonth, date);
+        // finction to send socket event
         getAvailableSeat(inputDate);
       });
     });
@@ -174,5 +177,16 @@
 
     dateElement.classList.add("selected-date");
     selectedDate = dateElement;
+  }
+
+  function updateSeatAnalysis(domElement, data) {
+    domElement.children[0].innerText = `Total seat: ${data.socketData?.totalSeats}`;
+    domElement.children[1].innerHTML = `<span class="box remaining-seat"></span>Available seat: ${data.socketData?.availableSeats}`;
+    domElement.children[2].innerHTML = `<span class="box booked"></span>Booked Seat : ${
+      data.socketData?.bookedSeats.length || 0
+    }`;
+    domElement.children[3].innerHTML = `<span class="box selected-seat"></span>Selected Seat : ${
+      data.socketData?.selectedSeat || 0
+    }`;
   }
 </script>

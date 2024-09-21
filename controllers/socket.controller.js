@@ -13,8 +13,8 @@ export const getSeatAvailability = async (data, callback) => {
       socketData: {
         totalSeats: 36,
         availableSeats: 48, //totalSeats - bookedSeats.length,
-        bookedSeats: [4, 8, 9, 45, 16],
-        choosenSeats: 4,
+        bookedSeats: [4, 8, 9, 45],
+        selectedSeat: 4,
       },
     });
   } catch (err) {

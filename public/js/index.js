@@ -23,6 +23,8 @@ function getAvailableSeat(inputDate) {
 
 // update classroom details
 socket.on("update-classroom", (data) => {
-  console.log(data);
   // busisness logic to update the classroom seat and details
+  const seatAnalytics = document.getElementById("seat-analytics");
+  updateSeatAnalysis(seatAnalytics, data);
+  // redraw seats
 });
