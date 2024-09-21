@@ -6,7 +6,7 @@ import SendResponse from "../utils/responseHandler.utils.js";
 
 export const classroom = async (req, res, next) => {
   try {
-    if (!req.isAuthenticated()) return res.redirect("/sign-in");
+    // if (!req.isAuthenticated()) return res.redirect("/sign-in");
     return res.render("classroom", { title: "Classroom" });
   } catch (err) {
     next(err);
@@ -22,7 +22,7 @@ export const bookSeat = CatchAsyncError(async (req, res, next, session) => {
       {
         userId: req.user.id,
         seatNumber: parseInt(seatNumber),
-        bookedDate: selectedDate,
+        bookedDate: new Date(selectedDate),
       },
     ],
     { session }

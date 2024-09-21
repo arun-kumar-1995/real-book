@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import { classroom  , bookSeat} from "../controllers/classromm.controller.js";
+import { classroom  , bookSeat} from "../controllers/classroom.controller.js";
 
 // define classroom routes
 router.route("/").get(classroom);

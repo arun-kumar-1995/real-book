@@ -3,22 +3,36 @@ import Booking from "../models/booking.models.js";
 import handleSockerError from "../sockets/socket.errorHandler.js";
 
 export const getSeatAvailability = async (data, callback) => {
-  const { io, inputDate } = data;
-  try {
-    // const seat = await Booking.find({ bookedDate: inputDate, status: booked });
-    // console.log(seat);
-    // emit event upon fetching
+  const { io, socket , inputDate } = data;
 
+  try {
+    const query = {
+      bookedDate: new Date(inputDate),
+      status: "booked",
+    };
+    const [bookedSeats, userBooked] = await Promise.all([
+      await Booking.find(query).select("seatNumber -_id").lean(),
+      Booking.findOne({
+        userId: req.user._id,
+        ...query,
+      })
+        .select("seatNumber -_id")
+        .lean(),
+    ]);
+
+    const bookedSeatNumber = bookedSeats.map((seat) => seat.seatNumber);
+    const totalSeats = 36;
+
+    // emit event upon fetching
     io.emit(Events.UPDATE_CLASSROOM, {
       socketData: {
-        totalSeats: 36,
-        availableSeats: 48, //totalSeats - bookedSeats.length,
-        bookedSeats: [4, 8, 9, 45],
-        selectedSeat: 4,
+        totalSeats,
+        availableSeats: totalSeats - bookedSeatNumber.length,
+        bookedSeats: bookedSeatNumber,
+        selectedSeat: userBooked.seatNumber,
       },
     });
   } catch (err) {
-    console.log(err);
-    // handleSockerError(socket, err);
+    handleSockerError(socket, err);
   }
 };
