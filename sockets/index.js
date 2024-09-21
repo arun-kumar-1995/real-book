@@ -1,4 +1,6 @@
 import { Server } from "socket.io";
+import socketManager from "../sockets/socket.manager.js";
+import Events from "../events/eventName.js";
 
 const InitializeSocketConnection = (expressServer) => {
   // setting up socket.io
@@ -9,10 +11,13 @@ const InitializeSocketConnection = (expressServer) => {
     },
   });
 
-  socketIo.on("connection", (socket) => {
-    console.log("A user connected:", socket.id);
+  // apply middleware here
 
-    socket.on("disconnect", () => {
+  socketIo.on(Events.CONNECT, (socket) => {
+    console.log("A user connected:", socket.id);
+    // call socket mager ti handle socket connection at one place
+    socketManager(socketIo, socket);
+    socket.on(Events.DISCONNECT, () => {
       console.log(`User disconnected: ${socket.id}`);
     });
   });

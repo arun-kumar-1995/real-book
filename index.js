@@ -9,7 +9,7 @@ const { PORT: port = 8000 } = process.env;
 const startServer = async () => {
   try {
     // connect to db
-    await connectDB();
+    // await connectDB();
     // create server
     const expressServer = http.createServer(app);
     const io = InitializeSocketConnection(expressServer);
