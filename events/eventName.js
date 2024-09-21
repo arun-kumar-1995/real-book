@@ -1,6 +1,6 @@
 const Events = {
   // ... pre-defined events
-  CONNECT: "connect",
+  CONNECT: "connection",
   CONNECT_ERROR: "connect_error",
   CONNECT_TIMEOUT: "connect_timeout",
   DISCONNECT: "disconnect",

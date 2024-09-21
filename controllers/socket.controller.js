@@ -1,10 +1,9 @@
 export const getSeatAvailability = async (data, callback) => {
-    try{
+    const { io, inputDate } = data;
+  try {
+    // get the io and data
+    console.log(inputDate);
+  } catch (err) {
 
-    }catch(err){
-        
-    }
-  // get the io and data
-  const { io, inputDate } = data;
-  console.log(inputDate);
+  }
 };
