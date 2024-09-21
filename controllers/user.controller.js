@@ -53,6 +53,7 @@ export const createSession = CatchAsyncError(async (req, res, next) => {
 
   //get token
   const token = getSignInToken(user._id);
+
   // set token inside cookie
   setCookie(res, user, token);
 

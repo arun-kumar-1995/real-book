@@ -3,8 +3,7 @@ import Booking from "../models/booking.models.js";
 import handleSockerError from "../sockets/socket.errorHandler.js";
 
 export const getSeatAvailability = async (data, callback) => {
-  const { io, socket , inputDate } = data;
-
+  const { io, socket, inputDate } = data;
   try {
     const query = {
       bookedDate: new Date(inputDate),
@@ -13,7 +12,7 @@ export const getSeatAvailability = async (data, callback) => {
     const [bookedSeats, userBooked] = await Promise.all([
       await Booking.find(query).select("seatNumber -_id").lean(),
       Booking.findOne({
-        userId: req.user._id,
+        userId: socket.user.id,
         ...query,
       })
         .select("seatNumber -_id")
