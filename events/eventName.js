@@ -13,6 +13,7 @@ const Events = {
   RECONNECT_FAILED: "reconnect_failed",
 
   //... Custom Events
+  SEAT_AVAILABILITY: "seat-availability",
 };
 
 export default Events;

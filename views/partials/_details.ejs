@@ -109,7 +109,9 @@
     Array.from(dates).forEach((date) => {
       date.addEventListener("click", function (e) {
         selectDate(date, todayDate);
-        calculateDateInput(currentYear, currentMonth, date);
+        const inputDate = calculateDateInput(currentYear, currentMonth, date);
+        // send socket event
+        getSeatAvailability(inputDate);
       });
     });
   }
@@ -120,6 +122,7 @@
 
     const inputDate = currentYear + "-" + formattedMonth + "-" + formattedDay;
     document.getElementById("dateInput").value = inputDate;
+    return inputDate;
   }
 
   function drawCalendar(currentDate, firstDay, daysInMonth) {

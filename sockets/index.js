@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import socketHandler from "../sockets/socket.handler.js";
+import socketManager from "../sockets/socket.handler.js";
 
 const InitializeSocketConnection = (expressServer) => {
   // setting up socket.io
@@ -15,7 +15,7 @@ const InitializeSocketConnection = (expressServer) => {
   socketIo.on("connection", (socket) => {
     console.log("A user connected:", socket.id);
     // call socket handler
-    socketHandler(socketIo, socket);
+    socketManager(socketIo, socket);
     socket.on("disconnect", () => {
       console.log(`User disconnected: ${socket.id}`);
     });
