@@ -28,7 +28,7 @@ export const getSeatAvailability = async (data, callback) => {
         totalSeats,
         availableSeats: totalSeats - bookedSeatNumber.length,
         bookedSeats: bookedSeatNumber,
-        selectedSeat: userBooked.seatNumber,
+        selectedSeat: userBooked?.seatNumber || 0,
       },
     });
   } catch (err) {
