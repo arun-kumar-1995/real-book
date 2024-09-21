@@ -111,7 +111,7 @@
         selectDate(date, todayDate);
         const inputDate = calculateDateInput(currentYear, currentMonth, date);
         // send socket event
-        getSeatAvailability(inputDate);
+        getAvailableSeat(inputDate);
       });
     });
   }

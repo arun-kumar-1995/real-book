@@ -1,4 +1,3 @@
-console.log("hello world!");
 // Initialize Socket.IO client
 //  global socket instance
 const socket = io();
@@ -18,6 +17,12 @@ socket.on("error", (error) => {
   // Take appropriate action, such as notifying the user
 });
 
-function getSeatAvailability(inputDate) {
-  socket.emit("seat-availability", { inputDate });
+function getAvailableSeat(inputDate) {
+  socket.emit("seat-available", { inputDate });
 }
+
+// update classroom details
+socket.on("update-classroom", (data) => {
+  console.log(data);
+  // busisness logic to update the classroom seat and details
+});

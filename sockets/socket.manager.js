@@ -5,7 +5,7 @@ import socketHandler from "./socket.handler.js";
 // socket is connect socket object
 // io  is socket instance
 const socketManager = (io, socket) => {
-  socket.on(events.SEAT_AVAILABILITY, socketHandler(getSeatAvailability, io));
+  socket.on(events.SEAT_AVAILABLE, socketHandler(getSeatAvailability, io));
 };
 
 export default socketManager;
