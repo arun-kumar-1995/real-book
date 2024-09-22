@@ -1,31 +1,26 @@
-// // Initialize Socket.IO client
-// //  global socket instance
-// const socket = io();
+document.addEventListener("DOMContentLoaded", function () {
+  const socket = io();
+  // listing for the conenction event
+  socket.on("connect", () => {
+    console.log("A user connected: " + socket.id);
+  });
 
-// // connect socket
-// socket.on("connect", () => {
-//   console.log("Connected to Socket.IO server");
-// });
+  // listing for disconnect event
+  socket.on("disconnect", () => {
+    console.log("Socket Disconnected" + socket.id);
+  });
 
-// // disconnect event
-// socket.on("disconnect", () => {
-//   console.log("Disconnected from Socket.IO server");
-// });
+  // Define globally
+  window.getAvailableSeat = function (inputDate) {
+    socket.emit("seat-available", { inputDate });
+  };
 
-// socket.on("error", (error) => {
-//   console.error("Socket encountered error:", error);
-//   // Take appropriate action, such as notifying the user
-// });
-
-// function getAvailableSeat(inputDate) {
-//   socket.emit("seat-available", { inputDate });
-// }
-
-// // update classroom details
-// socket.on("update-classroom", (data) => {
-//   // busisness logic to update the classroom seat and details
-//   const seatAnalytics = document.getElementById("seat-analytics");
-//   updateSeatAnalysis(seatAnalytics, data);
-//   // redraw classroom
-//   setupClassroom((totalSeats = 36), (seatsPerRow = 8), data.socketData);
-// });
+  // update classroom details
+  socket.on("update-classroom", (data) => {
+    // busisness logic to update the classroom seat and details
+    const seatAnalytics = document.getElementById("seat-analytics");
+    updateSeatAnalysis(seatAnalytics, data);
+    // redraw classroom
+    setupClassroom((totalSeats = 36), (seatsPerRow = 8), data.socketData);
+  });
+});
