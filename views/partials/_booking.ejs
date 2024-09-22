@@ -10,25 +10,21 @@
   <script>
 
     // dynamically creating seats
-
-    // definig contants 
-    const totalSeats = 36;
-    const seatsPerRow = 8;
-    const rows = Math.ceil(totalSeats / seatsPerRow );
-    const mid = Math.ceil(seatsPerRow / 2);
-
     // let initial seat number
     let seatNumber = 1;
     // for booked seat number
-    const bookedSeats = [1 , 5, 10 , 12];
+    // const bookedSeats = [1 , 5, 10 , 12];
     let selectedSeat = null;
+    
+    function initBookingPage() {
+      const defaultData = {
+    totalSeats: 36,
+    availableSeats: 36,
+    bookedSeats: [],
+    selectedSeat: 0,
+  };
 
-   function initBookingPage() {
-
-    // globalselectors
-    const seatingArea = document.querySelector(".seating-area");
-    drawSeat();
-    createClassroom(rows, seatsPerRow, mid, totalSeats, bookedSeats, seatingArea)
+      setupClassroom(totalSeats=36 , seatsPerRow=8 , defaultData);
 
     // for selecting and deselecting seats
     const seats = document.querySelectorAll('.seat');
@@ -48,21 +44,22 @@
   });
    } 
 
-   function drawSeat(seatNumber, isBooked) {
-    const seatDiv = document.createElement("div");
-    seatDiv.classList.add("seat");
-    seatDiv.textContent = `s-${seatNumber}`;
-    
-    // Mark the seat as booked if needed
-    if (isBooked) {
-      seatDiv.classList.add("booked");
+
+   function setupClassroom(totalSeats , seatsPerRow , data){
+       console.log("data----------" , data);
+
+    const seatingArea = document.querySelector(".seating-area");
+    // definig contants 
+        const rows = Math.ceil(totalSeats / seatsPerRow );
+        const mid = Math.ceil(seatsPerRow / 2);
+
+        createClassroom(rows, seatsPerRow, mid, totalSeats, data.bookedSeats,data.selectedSeat,  seatingArea)
     }
-    
-    return seatDiv;
 
-   }
 
-   function createClassroom(rows, seatsPerRow, mid, totalSeats, bookedSeats , seatingArea){
+   function createClassroom(rows, seatsPerRow, mid, totalSeats, bookedSeats , selectedSeat , seatingArea){
+console.log(bookedSeats);
+
     for (let row = 1; row <= rows; row++) {
         const rowDiv = document.createElement('div');
         rowDiv.classList.add('row');
@@ -82,10 +79,18 @@
                 seatDiv.setAttribute("data-seat-number" , seatNumber);
                 rowDiv.appendChild(seatDiv);
                 seatNumber++;
+            
                 // for booked seats
-                if(bookedSeats.includes(seatNumber - 1)){
-                    seatDiv.classList.add('booked');
+                if(bookedSeats.includes(seatNumber)){
+                  seatDiv.classList.add('booked');
                 }
+                if(selectedSeat === seatNumber){
+                  console.log("YES-------")
+                  seatDiv.classList.add('selected-seat');
+                  seatDiv.style.pointerEvents = 'none';
+                  
+                }
+
             }
         }
         seatingArea.appendChild(rowDiv);

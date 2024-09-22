@@ -26,5 +26,6 @@ socket.on("update-classroom", (data) => {
   // busisness logic to update the classroom seat and details
   const seatAnalytics = document.getElementById("seat-analytics");
   updateSeatAnalysis(seatAnalytics, data);
-  // redraw seats
+  // redraw classroom
+  setupClassroom((totalSeats = 36), (seatsPerRow = 8), data.socketData);
 });

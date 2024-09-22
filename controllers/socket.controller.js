@@ -19,7 +19,8 @@ export const getSeatAvailability = async (data, callback) => {
         .lean(),
     ]);
 
-    const bookedSeatNumber = bookedSeats.map((seat) => seat.seatNumber);
+    const bookedSeatNumber = bookedSeats.map((seat) => Number(seat.seatNumber));
+
     const totalSeats = 36;
 
     // emit event upon fetching
