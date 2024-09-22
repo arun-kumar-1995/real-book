@@ -162,6 +162,7 @@ function updateSeatAnalysis(domElement, data) {
 // modal script
 
 function openModal() {
+  console.log("open modal clikced");
   bookingModal.classList.add("show");
   bookingModal.children[0].classList.add("display");
 }
@@ -187,16 +188,13 @@ function initBooking() {
   };
 
   setupClassroom((totalSeats = 36), (seatsPerRow = 8), defaultData);
+}
 
-  // for selecting and deselecting seats
+function addSeatEventListeners() {
   const seats = document.querySelectorAll(".seat");
-  // add event listeners for each seat
   Array.from(seats).forEach((seat) => {
     seat.addEventListener("click", function () {
-      // definimg select seat function
       selectSeat(seat);
-
-      // for modal
       selectedSeatNumber = seat.getAttribute("data-seat-number");
       modalText.textContent = `Do you want to book Seat-${selectedSeatNumber} ?`;
       document.getElementById("seatInput").value = selectedSeatNumber;
@@ -256,7 +254,6 @@ function createClassroom(
         rowDiv.appendChild(seatDiv);
 
         // for booked seats
-        console.log(seatNumber);
         if (bookedSeats.includes(seatNumber)) {
           seatDiv.classList.add("booked");
         }
@@ -271,6 +268,7 @@ function createClassroom(
     // seatingArea.innerHTML = "";
     seatingArea.appendChild(rowDiv);
   }
+  addSeatEventListeners();
 }
 
 // Function to create a middle gap div
