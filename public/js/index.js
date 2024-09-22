@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // refetch booked seats
   socket.on("refetch-seat", (data) => {
-    console.log(data);
+    // rerender classroom
+    rerenderClassroom(data);
   });
 });

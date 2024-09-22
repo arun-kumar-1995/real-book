@@ -208,8 +208,6 @@ function addSeatEventListeners() {
 }
 
 function setupClassroom(totalSeats, seatsPerRow, data) {
-  console.log("data----------", data.bookedSeats);
-
   const seatingArea = document.querySelector(".seating-area");
   seatingArea.innerHTML = "";
 
@@ -303,4 +301,13 @@ function updateSeatState(seat, isSelected) {
   } else {
     seat.classList.remove("clicked-seat");
   }
+}
+
+// re render classroom
+
+function rerenderClassroom(data) {
+  // Re-render the classroom
+  const totalSeats = data.totalSeats;
+  const seatsPerRow = 8;
+  setupClassroom(totalSeats, seatsPerRow, data);
 }

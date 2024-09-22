@@ -55,7 +55,22 @@ export const bookSeat = async (data, callback) => {
       { new: true, upsert: true }
     );
 
-    io.emit(Events.REFETCH_SEAT, { bookSeat: booking?.seatNumber });
+    // Retrieve the updated booked seats
+    const bookedSeats = await Booking.find({
+      bookedDate: new Date(selectedDate),
+      status: "booked",
+    })
+      .select("seatNumber -_id")
+      .lean();
+
+    const bookedSeatNumbers = bookedSeats.map((seat) => seat.seatNumber);
+
+    const totalSeats = 36;
+    io.emit(Events.REFETCH_SEAT, {
+      selectedSeat: seatNumber,
+      totalSeats,
+      bookedSeats: bookedSeatNumbers,
+    });
   } catch (err) {
     handleSockerError(socket, err.message);
   }
