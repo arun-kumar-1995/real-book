@@ -171,7 +171,11 @@ function closeModal() {
   bookingModal.children[0].classList.remove("display");
 }
 
-noButton.addEventListener("click", closeModal);
+noButton.addEventListener("click", function () {
+  document.querySelector(".clicked-seat").classList.remove("clicked-seat");
+  // close modal
+  closeModal();
+});
 yesButton.addEventListener("click", closeModal);
 
 // ========   for classroom seat
@@ -295,8 +299,8 @@ function selectSeat(seat) {
 // Function to update the visual state of a seat
 function updateSeatState(seat, isSelected) {
   if (isSelected) {
-    seat.classList.add("selected-seat");
+    seat.classList.add("clicked-seat");
   } else {
-    seat.classList.remove("selected-seat");
+    seat.classList.remove("clicked-seat");
   }
 }

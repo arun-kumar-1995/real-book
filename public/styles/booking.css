@@ -156,7 +156,7 @@ header {
 .seat:hover {
   cursor: pointer;
   transform: translateY(-2px);
-  background-color: var(--clr-selected-seat);
+  background-color: var(--clr-clicked-seat);
 }
 
 .booked {
@@ -171,7 +171,9 @@ header {
 .remaining-seat {
   background-color: var(--clr-seat);
 }
-
+.clicked-seat{
+  background-color: var(--clr-clicked-seat);
+}
 .middle-gap {
   width: 80px;
   background-color: transparent;
