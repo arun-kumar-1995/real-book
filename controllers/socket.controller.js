@@ -1,5 +1,6 @@
 import Events from "../events/eventName.js";
 import Booking from "../models/booking.models.js";
+import User from "../models/user.models.js";
 import handleSockerError from "../sockets/socket.errorHandler.js";
 
 export const getSeatAvailability = async (data, callback) => {
@@ -33,6 +34,29 @@ export const getSeatAvailability = async (data, callback) => {
       },
     });
   } catch (err) {
-    handleSockerError(socket, err);
+    handleSockerError(socket, err.message);
+  }
+};
+
+export const bookSeat = async (data, callback) => {
+  const { io, socket, seatNumber, selectedDate } = data;
+  try {
+    const booking = await Booking.create({
+      userId: socket.user.id,
+      seatNumber: parseInt(seatNumber),
+      bookedDate: new Date(selectedDate),
+    });
+
+    if (!booking) handleSockerError(socket, "Booking failed");
+
+    const user = await User.findByIdAndUpdate(
+      socket.user.id,
+      { $addToSet: { bookings: booking?._id } },
+      { new: true, upsert: true }
+    );
+
+    io.emit(Events.REFETCH_SEAT, { bookSeat: booking?.seatNumber });
+  } catch (err) {
+    handleSockerError(socket, err.message);
   }
 };

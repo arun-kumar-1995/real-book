@@ -23,4 +23,21 @@ document.addEventListener("DOMContentLoaded", function () {
     // redraw classroom
     setupClassroom((totalSeats = 36), (seatsPerRow = 8), data.socketData);
   });
+
+  // book seat
+  const bookingform = document.querySelector("#booking-modal form");
+  bookingform.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const seatNumber = bookingform.children[0].value;
+    const selectedDate = bookingform.children[1].value;
+    console.log(seatNumber, selectedDate);
+    // emit socket event for booking
+    socket.emit("book-seat", { seatNumber, selectedDate });
+  });
+
+  // refetch booked seats
+  socket.on("refetch-seat", (data) => {
+    console.log(data);
+  });
 });
