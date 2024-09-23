@@ -4,7 +4,7 @@ const socketAuth = (socket, token) => {
   if (value) {
     cookie[name] = JSON.parse(decodeURIComponent(value));
   }
-  socket.user = cookie.user || null;
+  socket.user = cookie[name].user || null;
 };
 
 export default socketAuth;
