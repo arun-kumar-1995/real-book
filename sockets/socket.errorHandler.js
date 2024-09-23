@@ -1,6 +1,7 @@
-const handleSockerError = (socket, error) => {
+const handleSockerError = (socket, message) => {
+  console.error(`Error in socketHandler: ${message}`);
   socket.emit("error", {
-    message: error.message,
+    message,
   });
 };
 

@@ -26,7 +26,8 @@
   --clr-header: #1c6c7e;
   --clr-seat: #81c784;
   --clr-booked: #d32f2f;
-  --clr-selected-seat: #1976d2;
+  --clr-clicked-seat: #1976d2;
+  --clr-selected-seat: #d80fce;
 
   /* margin */
   --mg-04: 0.4em;

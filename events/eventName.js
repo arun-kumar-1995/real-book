@@ -14,6 +14,7 @@ const Events = {
 
   //... Custom Events
   SEAT_AVAILABLE: "seat-available",
+  BOOK_SEAT : "book-seat",
   REFETCH_SEAT : "refetch-seat",
   UPDATE_CLASSROOM:"update-classroom"
 };

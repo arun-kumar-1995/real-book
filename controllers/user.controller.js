@@ -1,4 +1,3 @@
-import { response } from "express";
 import User from "../models/user.models.js";
 import CatchAsyncError from "../utils/catchAsyncError.utils.js";
 import ErrorHandler from "../utils/errorHandler.utils.js";
@@ -54,6 +53,7 @@ export const createSession = CatchAsyncError(async (req, res, next) => {
 
   //get token
   const token = getSignInToken(user._id);
+
   // set token inside cookie
   setCookie(res, user, token);
 

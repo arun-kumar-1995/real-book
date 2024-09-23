@@ -22,7 +22,7 @@ export const bookSeat = CatchAsyncError(async (req, res, next, session) => {
       {
         userId: req.user.id,
         seatNumber: parseInt(seatNumber),
-        bookedDate: selectedDate,
+        bookedDate: new Date(selectedDate),
       },
     ],
     { session }

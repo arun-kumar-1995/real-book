@@ -7,6 +7,7 @@ const schema = new mongoose.Schema(
     },
     seatNumber: {
       type: Number,
+      trim: true,
     },
     status: {
       type: String,
